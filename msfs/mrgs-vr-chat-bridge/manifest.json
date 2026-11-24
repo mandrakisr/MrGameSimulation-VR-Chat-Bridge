@@ -1,0 +1,26 @@
+{
+  "content_type": "IN_GAME_PANEL",
+  "creator": "Mandraki Bey",
+  "dependencies": [
+    {
+      "name": "fs-base-ui",
+      "package_version": "0.1.10"
+    }
+  ],
+  "description": "MrGameSimulations VR Chat Bridge: a standalone Social Stream Ninja chat viewer for any streamer. Paste your own SSN session ID once and your consolidated live chat (Twitch, YouTube, Kick, TikTok, Facebook, Trovo) reads right in the cockpit, sized for VR, with an adjustable background opacity.",
+  "export_type": "Community",
+  "manufacturer": "MrGameSimulation",
+  "package_version": "1.0.0",
+  "release_notes": {
+    "neutral": {
+      "LastUpdate": "1.0.0 — first release.",
+      "OlderHistory": ""
+    }
+  },
+  "tags": [
+    "PANEL",
+    "IN_GAME_PANEL"
+  ],
+  "title": "MrGameSimulations VR Chat Bridge",
+  "total_package_size": "61293"
+}

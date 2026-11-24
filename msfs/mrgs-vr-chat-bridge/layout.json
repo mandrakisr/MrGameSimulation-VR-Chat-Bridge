@@ -1,0 +1,34 @@
+{
+  "content": [
+    {
+      "path": "contentinfo/mrgs-vr-chat-bridge/thumbnail.jpg",
+      "size": 15526,
+      "date": 134398532514290000
+    },
+    {
+      "path": "ingamepanels/mrgschatpanel.xml",
+      "size": 1514,
+      "date": 134398534679690000
+    },
+    {
+      "path": "html_ui/ingamepanels/mrgschatpanel/mrgschatpanel.css",
+      "size": 14734,
+      "date": 134398550481920000
+    },
+    {
+      "path": "html_ui/ingamepanels/mrgschatpanel/mrgschatpanel.html",
+      "size": 2988,
+      "date": 134398534679760000
+    },
+    {
+      "path": "html_ui/ingamepanels/mrgschatpanel/mrgschatpanel.js",
+      "size": 25777,
+      "date": 134398550573370000
+    },
+    {
+      "path": "html_ui/icons/toolbar/icon_toolbar_mrgschat.svg",
+      "size": 754,
+      "date": 134398532422310000
+    }
+  ]
+}

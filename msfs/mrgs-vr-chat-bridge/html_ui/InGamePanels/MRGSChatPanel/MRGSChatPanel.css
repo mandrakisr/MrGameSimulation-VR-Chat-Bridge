@@ -1,0 +1,574 @@
+/* MrGameSimulations VR Chat Bridge — panel stylesheet (v1.0.0).
+ * Self-contained: no external fonts, images or CDN anything (MSFS
+ * panels can't rely on the network for assets). The palette is the
+ * shared design system's dark theme — deep navy surfaces, gold accents,
+ * one clean sans stack — with text sized UP for VR legibility:
+ * chat lines at 20px, names at 16px, every control a 48px+ target.
+ * The host fill rules mirror the proven reference panel: opaque navy
+ * page (a transparent page lets the framework composite stale frames
+ * over the live one) and scoped !important flex fill on the
+ * <ingame-ui> wrappers, the pattern working MSFS 2024 panels use. */
+
+/* Background opacity (user-adjustable, 0–100%, default 85%): the
+ * slider drives --mrgs-bg-alpha (v1.0.1: EVERYTHING except text
+ * consumes it — card fills, borders and shadows, plus every
+ * control: buttons, status pill, platform tags, the text input, the
+ * slider track and thumb). Text, names and tag text stay fully
+ * opaque at any setting, so at 0% only the words float over the
+ * sim. The variable lives on <html> because the page backdrop
+ * (body) needs it too; MRGSChatPanel.js sets it inline from
+ * localStorage at boot. */
+html {
+  --mrgs-bg-alpha: 0.85;
+}
+
+.mrgs-chat {
+  --mrgs-gold: #d4af37;
+  --mrgs-gold-deep: #8f6f14;
+  --mrgs-navy: #0a1226;
+  --mrgs-card: #141f3d;
+  --mrgs-line: #2a3a63;
+  --mrgs-text: #f2f4fa;
+  --mrgs-muted: #9aa7c7;
+  --mrgs-green: #57d98d;
+  --mrgs-red: #ff7a7a;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(10, 18, 38, 0.85);
+  background: rgba(10, 18, 38, var(--mrgs-bg-alpha, 0.85));
+}
+
+ingame-ui#MRGSChatPanel {
+  display: flex;
+  flex-direction: column;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+ingame-ui#MRGSChatPanel .ingameUiContent,
+ingame-ui#MRGSChatPanel .ingameUiWrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+ingame-ui#MRGSChatPanel #MainDisplay.hidden,
+ingame-ui#MRGSChatPanel #Footer.hidden {
+  display: none;
+}
+
+ingamepanel-custom {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mrgs-chat {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(170deg, rgba(13, 23, 48, 0.85) 0%, rgba(10, 18, 38, 0.85) 55%, rgba(8, 16, 32, 0.85) 100%);
+  background: linear-gradient(170deg, rgba(13, 23, 48, var(--mrgs-bg-alpha, 0.85)) 0%, rgba(10, 18, 38, var(--mrgs-bg-alpha, 0.85)) 55%, rgba(8, 16, 32, var(--mrgs-bg-alpha, 0.85)) 100%);
+  color: var(--mrgs-text);
+}
+
+.mrgs-chat #mrgs-view {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* ---------- shared ---------- */
+
+.mrgs-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 14px 16px 16px;
+  gap: 12px;
+}
+
+.mrgs-card {
+  background: linear-gradient(165deg, rgba(38, 56, 102, 0.47) 0%, rgba(20, 31, 61, 0.77) 55%, rgba(16, 28, 58, 0.81) 100%);
+  background: linear-gradient(165deg, rgba(38, 56, 102, calc(var(--mrgs-bg-alpha, 0.85) * 0.55)) 0%, rgba(20, 31, 61, calc(var(--mrgs-bg-alpha, 0.85) * 0.9)) 55%, rgba(16, 28, 58, calc(var(--mrgs-bg-alpha, 0.85) * 0.95)) 100%);
+  border: 1px solid rgba(42, 58, 99, 0.85);
+  border: 1px solid rgba(42, 58, 99, var(--mrgs-bg-alpha, 0.85));
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px rgba(2, 6, 18, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 12px rgba(2, 6, 18, calc(var(--mrgs-bg-alpha, 0.85) * 0.35)), inset 0 1px 0 rgba(255, 255, 255, calc(var(--mrgs-bg-alpha, 0.85) * 0.05));
+}
+
+.mrgs-btn {
+  appearance: none;
+  border: 1px solid var(--mrgs-gold-deep);
+  border-color: rgba(143, 111, 20, var(--mrgs-bg-alpha, 0.85));
+  background: linear-gradient(180deg, #e8c95c 0%, var(--mrgs-gold) 55%, #b8912a 100%);
+  background: linear-gradient(180deg, rgba(232, 201, 92, var(--mrgs-bg-alpha, 0.85)) 0%, rgba(212, 175, 55, var(--mrgs-bg-alpha, 0.85)) 55%, rgba(184, 145, 42, var(--mrgs-bg-alpha, 0.85)) 100%);
+  color: #1a1405;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: 10px;
+  min-height: 48px;
+  padding: 10px 22px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(2, 6, 18, 0.4);
+  box-shadow: 0 3px 10px rgba(2, 6, 18, calc(var(--mrgs-bg-alpha, 0.85) * 0.4));
+}
+
+.mrgs-btn:active {
+  transform: translateY(1px);
+}
+
+.mrgs-btn-secondary {
+  background: rgba(38, 56, 102, 0.55);
+  background: rgba(38, 56, 102, calc(var(--mrgs-bg-alpha, 0.85) * 0.55));
+  border-color: var(--mrgs-line);
+  border-color: rgba(42, 58, 99, var(--mrgs-bg-alpha, 0.85));
+  color: var(--mrgs-text);
+  box-shadow: none;
+}
+
+.mrgs-btn-small {
+  min-height: 48px;
+  padding: 8px 16px;
+  font-size: 15px;
+}
+
+/* ---------- header / status ---------- */
+
+.mrgs-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mrgs-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--mrgs-gold);
+  text-shadow: 0 2px 14px rgba(212, 175, 55, 0.22);
+}
+
+.mrgs-title .mrgs-chat-icon {
+  flex: 0 0 auto;
+}
+
+.mrgs-head-spacer {
+  flex: 1 1 auto;
+}
+
+.mrgs-livepill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--mrgs-muted);
+  background: rgba(20, 31, 61, 0.8);
+  background: rgba(20, 31, 61, calc(var(--mrgs-bg-alpha, 0.85) * 0.8));
+  border: 1px solid var(--mrgs-line);
+  border-color: rgba(42, 58, 99, var(--mrgs-bg-alpha, 0.85));
+  border-radius: 999px;
+  padding: 7px 14px;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.mrgs-livepill .mrgs-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--mrgs-muted);
+  flex: 0 0 auto;
+}
+
+.mrgs-livepill.on {
+  color: var(--mrgs-green);
+  border-color: rgba(87, 217, 141, 0.55);
+  border-color: rgba(87, 217, 141, calc(var(--mrgs-bg-alpha, 0.85) * 0.55));
+}
+
+.mrgs-livepill.on .mrgs-pulse {
+  background: var(--mrgs-green);
+  animation: mrgs-pulse 1.6s ease-in-out infinite;
+}
+
+.mrgs-livepill.wait {
+  color: var(--mrgs-gold);
+  border-color: rgba(212, 175, 55, 0.55);
+  border-color: rgba(212, 175, 55, calc(var(--mrgs-bg-alpha, 0.85) * 0.55));
+}
+
+.mrgs-livepill.wait .mrgs-pulse {
+  background: var(--mrgs-gold);
+  animation: mrgs-pulse 0.9s ease-in-out infinite;
+}
+
+.mrgs-livepill.off {
+  color: var(--mrgs-red);
+  border-color: rgba(255, 122, 122, 0.5);
+  border-color: rgba(255, 122, 122, calc(var(--mrgs-bg-alpha, 0.85) * 0.5));
+}
+
+.mrgs-livepill.off .mrgs-pulse {
+  background: var(--mrgs-red);
+}
+
+@keyframes mrgs-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.mrgs-statusline {
+  font-size: 15px;
+  color: var(--mrgs-muted);
+}
+
+.mrgs-statusline b {
+  color: var(--mrgs-text);
+  font-weight: 700;
+}
+
+/* ---------- chat feed ---------- */
+
+.mrgs-chat-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2px 2px 6px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mrgs-line) transparent;
+}
+
+#mrgs-chat-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mrgs-chat-row {
+  background: linear-gradient(165deg, rgba(38, 56, 102, 0.47) 0%, rgba(20, 31, 61, 0.77) 55%, rgba(16, 28, 58, 0.81) 100%);
+  background: linear-gradient(165deg, rgba(38, 56, 102, calc(var(--mrgs-bg-alpha, 0.85) * 0.55)) 0%, rgba(20, 31, 61, calc(var(--mrgs-bg-alpha, 0.85) * 0.9)) 55%, rgba(16, 28, 58, calc(var(--mrgs-bg-alpha, 0.85) * 0.95)) 100%);
+  border: 1px solid rgba(42, 58, 99, 0.85);
+  border: 1px solid rgba(42, 58, 99, var(--mrgs-bg-alpha, 0.85));
+  border-radius: 12px;
+  padding: 10px 14px 12px;
+  box-shadow: 0 4px 12px rgba(2, 6, 18, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 12px rgba(2, 6, 18, calc(var(--mrgs-bg-alpha, 0.85) * 0.35)), inset 0 1px 0 rgba(255, 255, 255, calc(var(--mrgs-bg-alpha, 0.85) * 0.05));
+  min-width: 0;
+}
+
+.mrgs-chat-row-new {
+  animation: mrgs-chat-in 240ms ease-out;
+}
+
+@keyframes mrgs-chat-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mrgs-chat-who {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  margin-bottom: 3px;
+}
+
+.mrgs-chat-tag {
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border: 1px solid var(--mrgs-line);
+  border-color: rgba(42, 58, 99, var(--mrgs-bg-alpha, 0.85));
+  border-radius: 999px;
+  background: rgba(38, 56, 102, 0.5);
+  background: rgba(38, 56, 102, calc(var(--mrgs-bg-alpha, 0.85) * 0.5));
+  color: var(--mrgs-muted);
+}
+
+.mrgs-chat-tag-twitch {
+  background: rgba(145, 70, 255, 0.22);
+  background: rgba(145, 70, 255, calc(var(--mrgs-bg-alpha, 0.85) * 0.22));
+  border-color: rgba(145, 70, 255, 0.65);
+  border-color: rgba(145, 70, 255, calc(var(--mrgs-bg-alpha, 0.85) * 0.65));
+  color: #c9a6ff;
+}
+
+.mrgs-chat-tag-youtube {
+  background: rgba(255, 0, 51, 0.18);
+  background: rgba(255, 0, 51, calc(var(--mrgs-bg-alpha, 0.85) * 0.18));
+  border-color: rgba(255, 60, 80, 0.6);
+  border-color: rgba(255, 60, 80, calc(var(--mrgs-bg-alpha, 0.85) * 0.6));
+  color: #ff9aa5;
+}
+
+.mrgs-chat-tag-kick {
+  background: rgba(83, 252, 24, 0.13);
+  background: rgba(83, 252, 24, calc(var(--mrgs-bg-alpha, 0.85) * 0.13));
+  border-color: rgba(83, 252, 24, 0.5);
+  border-color: rgba(83, 252, 24, calc(var(--mrgs-bg-alpha, 0.85) * 0.5));
+  color: #a4f97e;
+}
+
+.mrgs-chat-tag-tiktok {
+  background: rgba(37, 244, 238, 0.12);
+  background: rgba(37, 244, 238, calc(var(--mrgs-bg-alpha, 0.85) * 0.12));
+  border-color: rgba(37, 244, 238, 0.5);
+  border-color: rgba(37, 244, 238, calc(var(--mrgs-bg-alpha, 0.85) * 0.5));
+  color: #9ff5f1;
+}
+
+.mrgs-chat-tag-facebook {
+  background: rgba(24, 119, 242, 0.2);
+  background: rgba(24, 119, 242, calc(var(--mrgs-bg-alpha, 0.85) * 0.2));
+  border-color: rgba(24, 119, 242, 0.6);
+  border-color: rgba(24, 119, 242, calc(var(--mrgs-bg-alpha, 0.85) * 0.6));
+  color: #9cc4ff;
+}
+
+.mrgs-chat-tag-trovo {
+  background: rgba(25, 186, 131, 0.16);
+  background: rgba(25, 186, 131, calc(var(--mrgs-bg-alpha, 0.85) * 0.16));
+  border-color: rgba(25, 186, 131, 0.55);
+  border-color: rgba(25, 186, 131, calc(var(--mrgs-bg-alpha, 0.85) * 0.55));
+  color: #8fe6c3;
+}
+
+.mrgs-chat-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mrgs-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mrgs-chat-text {
+  font-size: 20px;
+  line-height: 1.45;
+  color: var(--mrgs-text);
+  overflow-wrap: break-word;
+}
+
+.mrgs-note {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--mrgs-muted);
+  padding: 14px 4px;
+}
+
+.mrgs-note b {
+  color: var(--mrgs-text);
+}
+
+.mrgs-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mrgs-chat-jump {
+  flex: 0 0 auto;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  transition: opacity 200ms ease;
+}
+
+.mrgs-chat-jump-hidden {
+  display: none;
+}
+
+/* ---------- setup view ---------- */
+
+.mrgs-setup-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--mrgs-text);
+  margin-bottom: 6px;
+}
+
+.mrgs-setup-sub {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--mrgs-muted);
+  margin-bottom: 14px;
+}
+
+.mrgs-field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--mrgs-gold);
+  margin-bottom: 8px;
+}
+
+.mrgs-input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 56px;
+  font-size: 19px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--mrgs-line);
+  border-color: rgba(42, 58, 99, var(--mrgs-bg-alpha, 0.85));
+  background: rgba(8, 16, 32, 0.85);
+  background: rgba(8, 16, 32, calc(var(--mrgs-bg-alpha, 0.85) * 0.85));
+  color: var(--mrgs-text);
+  outline: none;
+}
+
+.mrgs-input:focus {
+  border-color: var(--mrgs-gold);
+  border-color: rgba(212, 175, 55, var(--mrgs-bg-alpha, 0.85));
+}
+
+.mrgs-setup-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+}
+
+.mrgs-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--mrgs-muted);
+  margin-top: 12px;
+}
+
+.mrgs-step b {
+  color: var(--mrgs-text);
+}
+
+.mrgs-stepnum {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--mrgs-gold);
+  color: var(--mrgs-gold);
+  font-size: 15px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.mrgs-ver {
+  color: var(--mrgs-muted);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- background opacity slider ----------
+ * v1.0.1: the slider is a control like any other — its track and
+ * thumb consume --mrgs-bg-alpha and fade with everything else;
+ * only its label and value (text) stay fully opaque, which is also
+ * how you find the row again at 0%. The track and thumb are sized
+ * for VR pointers — a 44px-tall row, a 28px thumb. */
+
+.mrgs-opacity-row {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+}
+
+.mrgs-opacity-label {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--mrgs-gold);
+}
+
+.mrgs-slider {
+  flex: 1 1 auto;
+  appearance: none;
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--mrgs-line);
+  background: rgba(42, 58, 99, calc(var(--mrgs-bg-alpha, 0.85) * 0.8));
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+.mrgs-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0d67c 0%, var(--mrgs-gold) 60%, #b8912a 100%);
+  border: 2px solid var(--mrgs-gold-deep);
+  box-shadow: 0 2px 8px rgba(2, 6, 18, 0.5);
+  opacity: var(--mrgs-bg-alpha, 0.85);
+  cursor: pointer;
+}
+
+.mrgs-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0d67c 0%, var(--mrgs-gold) 60%, #b8912a 100%);
+  border: 2px solid var(--mrgs-gold-deep);
+  box-shadow: 0 2px 8px rgba(2, 6, 18, 0.5);
+  opacity: var(--mrgs-bg-alpha, 0.85);
+  cursor: pointer;
+}
+
+.mrgs-opacity-val {
+  flex: 0 0 auto;
+  min-width: 52px;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mrgs-text);
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- MrGameSimulations VR Chat Bridge — MSFS 2024 toolbar panel (v1.0.0).
+     A standalone Social Stream Ninja chat viewer for any streamer:
+     paste your own SSN session ID once and your consolidated live
+     chat (Twitch / YouTube / Kick / TikTok / Facebook / Trovo) reads
+     right in the cockpit, sized for VR.
+
+     The framework stack mirrors the proven reference toolbar panel exactly:
+     the head loads, in order, /SCSS/common.css, the framework scripts
+     (coherent, common, dataStorage, buttons, ToolBarPanels), the three
+     UI template imports, this panel's stylesheet, and the panel JS
+     last. Without the template imports the <ingame-ui> element is
+     never upgraded into the framework's window component — the page
+     renders as inert light DOM with no header, no dragging and no
+     input routing. The <ingame-ui> panel-id must exactly match the
+     registration XML's definition id (PANEL_MRGS_VRCHAT). -->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>MrGameSimulations VR Chat Bridge</title>
+  <link rel="stylesheet" href="/SCSS/common.css" />
+  <script type="text/javascript" src="/JS/coherent.js"></script>
+  <script type="text/javascript" src="/JS/common.js"></script>
+  <script type="text/javascript" src="/JS/dataStorage.js"></script>
+  <script type="text/javascript" src="/JS/buttons.js"></script>
+  <script type="text/javascript" src="/JS/Services/ToolBarPanels.js"></script>
+  <!-- The sim's UI templates MUST be imported, in this order, or the
+       <ingame-ui> element is never upgraded into the framework's
+       window component. NewPushButton comes first because it registers
+       <icon-button>, from which the auto-injected ingame-ui header
+       chrome (Reduce / Maximize / Detach / Extern / Close) is built. -->
+  <link rel="import" href="/templates/NewPushButton/NewPushButton.html" />
+  <link rel="import" href="/templates/ingameUi/ingameUi.html" />
+  <link rel="import" href="/templates/ingameUiHeader/ingameUiHeader.html" />
+  <link rel="stylesheet" href="./MRGSChatPanel.css" />
+  <script type="text/javascript" src="./MRGSChatPanel.js"></script>
+</head>
+<body class="border-box">
+  <ingamepanel-custom>
+    <ingame-ui id="MRGSChatPanel" panel-id="PANEL_MRGS_VRCHAT" title="MrGameSimulations VR Chat Bridge" class="ingameUiFrame panelInvisible" content-fit="true" min-width="25" min-height="35" resize="both">
+      <!-- .mrgs-chat is the app root; MRGSChatPanel.js renders the
+           setup view or the chat view into #mrgs-view. -->
+      <div class="mrgs-chat" id="mrgs-root">
+        <div id="mrgs-view"></div>
+      </div>
+      <!-- Stock template sections, present (and kept hidden) in every
+           working panel — the wrapper lifecycle in MRGSChatPanel.js
+           hides them, mirroring the reference panels. -->
+      <section id="MainDisplay" class="hidden"></section>
+      <section id="Footer" class="hidden"></section>
+    </ingame-ui>
+  </ingamepanel-custom>
+</body>
+</html>

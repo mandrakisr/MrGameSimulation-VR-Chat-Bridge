@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MrGameSimulations VR Chat Bridge — InGamePanels registration.
+     This XML is the SOURCE for the panel registration. The MSFS 2024 SDK
+     package build compiles it into InGamePanels/MRGSChatPanel.spb (SPB
+     asset group in PackageDefinitions/mrgs-vr-chat-bridge.xml — see
+     ../BUILD-REPORT.md). A copy also ships inside the package folder;
+     some MSFS 2024 builds read the XML directly, and having it listed
+     in layout.json does no harm once the .spb is present too.
+
+     The panel VIEW size comes from the dimension elements inside this
+     definition (values are PERCENT of screen — Asobo, MSFS DevSupport).
+     Without them the sim falls back to a default small view the mouse
+     can't grab. The definition id must exactly match the panel-id on
+     the <ingame-ui> element in MRGSChatPanel.html (PANEL_MRGS_VRCHAT)
+     or the framework never binds the window. Dimensions mirror the
+     proven reference-panel registration. -->
+<SimBase.Document Type="InGamePanels" version="1,0">
+	<Filename>MRGSChatPanel.xml</Filename>
+	<InGamePanels.InGamePanelDefinition id="PANEL_MRGS_VRCHAT" Name="MrGameSimulations VR Chat Bridge" url="html_ui/InGamePanels/MRGSChatPanel/MRGSChatPanel.html" icon="ICON_TOOLBAR_MRGSCHAT" buttonVisible="true" resizeDirections="both">
+		<minWidth>25</minWidth>
+		<minHeight>35</minHeight>
+		<defaultWidth>48</defaultWidth>
+		<defaultHeight>68</defaultHeight>
+	</InGamePanels.InGamePanelDefinition>
+</SimBase.Document>

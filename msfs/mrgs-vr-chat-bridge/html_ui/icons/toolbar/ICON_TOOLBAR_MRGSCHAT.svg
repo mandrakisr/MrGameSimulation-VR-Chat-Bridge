@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MrGameSimulations VR Chat Bridge toolbar icon: a gold speech bubble
+     with two chat lines and a tail, drawn as single-colour (#d4af37)
+     geometric shapes only, so it stays legible at toolbar size (~24px).
+     The bubble echoes the chat page's inline SVG message icon. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g fill="#d4af37">
+    <!-- bubble body -->
+    <path d="M14 10 H86 a8 8 0 0 1 8 8 V62 a8 8 0 0 1 -8 8 H46 L26 92 V70 H14 a8 8 0 0 1 -8 -8 V18 a8 8 0 0 1 8 -8 Z"/>
+  </g>
+  <g fill="#0a1226">
+    <!-- chat lines cut out of the bubble -->
+    <rect x="22" y="28" width="56" height="9" rx="4.5"/>
+    <rect x="22" y="45" width="38" height="9" rx="4.5"/>
+  </g>
+</svg>
